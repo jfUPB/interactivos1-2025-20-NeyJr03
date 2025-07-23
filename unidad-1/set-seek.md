@@ -26,9 +26,7 @@ function draw() {
 ```
 
 -Captura:
-
-![![Uploading image.png…]()
-](./circulos.png)
+<img width="495" height="497" alt="image" src="https://github.com/user-attachments/assets/35f8e46b-d8bf-4075-89d2-1dca9b21a48f" />
 
 
 
