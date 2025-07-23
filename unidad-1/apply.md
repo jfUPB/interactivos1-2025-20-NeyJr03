@@ -6,7 +6,7 @@
 ### Actividad 06: Control de movimiento con micro:bit
 
  Enlace al programa en p5.js:
-[https://editor.p5js.org/tu_usuario/sketches/tu_sketch_id](https://editor.p5js.org/tu_usuario/sketches/tu_sketch_id)
+[https://editor.p5js.org/tu_usuario/sketches/tu_sketch_id](https://editor.p5js.org/JuanJo003/full/4GNdMNvG8)
 
 ---
 
