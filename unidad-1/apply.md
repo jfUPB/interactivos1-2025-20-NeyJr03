@@ -3,6 +3,40 @@
 
 ## 🛠 Fase: Apply
 
+### Actividad 05: Interacción básica con micro:bit
+
+Como tal desarrollamos un sistema físico interactivo que conecta una placa micro:bit con un entorno gráfico en p5.js, permitiendo que el comportamiento de un objeto visual (un cuadrado) cambie en tiempo real según las interacciones físicas del usuario (presionar un botón).
+
+Comunicación entre micro:bit y p5.js
+
+- Utilizamos comunicación serial entre el micro:bit y el navegador web usando la librería p5.webserial.js.
+
+- Cuando el botón A del micro:bit se presiona, se envía un carácter 'A' por el puerto serial.
+
+- Cuando no está presionado, se envía un carácter 'N'.
+
+- Este mensaje es leído en p5.js para actualizar el color del cuadrado que se muestra en pantalla.
+
+En cuanto al funcionamiento del código:
+
+- Se inicializa la comunicación serial a 115200 baudios.
+
+- El bucle verifica continuamente si el botón A está presionado.
+
+Resultado:
+
+- El usuario puede interactuar físicamente presionando un botón en el micro:bit.
+
+- Esa acción afecta directamente lo que sucede en la pantalla: el cuadrado se vuelve rojo si se presiona el botón A, o verde si no lo está.
+
+- Este es un ejemplo básico pero poderoso de cómo los mundos físico y digital pueden interactuar en tiempo real usando herramientas accesibles como p5.js y micro:bit.
+
+- Envía 'A' si está presionado y 'N' si no lo está.
+
+- La función sleep(100) hace que se envíen mensajes cada 100ms para mantener actualizada la comunicación.
+
+  
+
 ### Actividad 06: Control de movimiento con micro:bit
 
  Enlace al programa en p5.js:
