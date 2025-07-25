@@ -45,4 +45,39 @@ Parte 2: reflexión sobre tu proceso (Metacognición)
 
   Rta//: En lo personal claramente me beneficio seguir un paso a paso, de esta manera estoy seguro de que es lo que estoy haciendo y saber en que parte me pude haber equivado
 
+### Actividad 08: Coevaluación
+
+Aunque ambos logramos que el círculo se moviera horizontalmente usando los botones A y B del micro:bit, pero mi compañero resolvió el problema con alguna cosa diferente a la mía.
+
+Mientras que yo utilicé button_a.is_pressed() y button_b.is_pressed() en el micro:bit para enviar los caracteres 'L' y 'R' continuamente cuando se mantenía presionado el botón, mi compañero optó por button_a.was_pressed() y button_b.was_pressed() para enviar un único mensaje cada vez que se presionaban los botones. Esto hizo que su círculo se moviera en pasos más controlados, uno a uno, con cada clic, en lugar de deslizarse de forma continua como en mi caso.
+
+Aprendí que esa forma de hacerlo puede ser útil si se quiere un control más preciso del movimiento, como en juegos por turnos o interfaces por pasos. Mientras que como yo o hice es mejor cuando se busca una sensación de movimiento más fluida o continuo.
+
+
+### Actividad 09: Feedback
+
+- Continuar: ¿Qué actividad, video o ejemplo de esta unidad te resultó más inspirador o te ayudó más a entender el potencial de los sistemas físicos interactivos?
+
+  Rta//: La primera vez que usamos el micro:bit haciendo que se reflejara la mariposa y posteriormente por medio de un codigo cuando se le daba amor se mostraba el corazon por un momento, me hizo entender las posibilidades que tenia con estos procesos
+
+
+- Dejar de hacer: ¿Hubo alguna parte que te pareció demasiado abstracta, muy rápida o confusa? ¿Hay algo que crees que podríamos cambiar para que sea más claro?
+
+  Rta//: En lo personal tuve alguna confusión a la hora de saber donde subir mi bitacora, se me creaban carpetas extra o ponia las cosas donde no, puede que alguna explicacion de todo más a profunidad me hubiera ayudado en su momento
+
+
+- Empezar a hacer: ¿Qué te genera más curiosidad ahora? ¿Te gustaría explorar más sensores del micro:bit (luz, temperatura), crear visualizaciones más complejas en p5.js o ver más ejemplos de proyectos artísticos?
+
+  Rta//: Si, me llama mucho la atención que mas posibilidades tiene el trabajar con el microbit, usando otros medios físicos como podria ser la temperatura
+
+
+- Balance inspiración vs. técnica: ¿Cómo sentiste el equilibrio entre ver los videos inspiradores de la Actividad 01 y la parte técnica de conectar las herramientas en las actividades 03-06?
+
+  Rta//: Me parecio buena la manera de explicar un poco la idea del curso por medio de los videos y luego me parecio organizado el proceso de conectar las herramientas, paso por paso es un buen método
+
+
+- Comentario adicional: ¿Hay algo más que quieras compartir sobre tu experiencia en esta unidad introductoria?
+
+  Rta//: Pues me gustó la manera en la que se trabajo, dandonos depronto la posibilidad de llegar a la casa y con calma analizar los procesos
+
 
