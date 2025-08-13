@@ -45,6 +45,24 @@ El programa principal ejecuta continuamente el método `update()` de ambos píxe
 **Implementando un semáforo con máquina de estados**
 
 ---
+Estados del programa
+Rojo: LED superior encendido.
+
+Verde: LED inferior encendido.
+
+Amarillo: LED central encendido.
+
+Eventos (Inputs)
+Tiempo transcurrido mayor que el intervalo del estado actual: provoca la transición al siguiente color del semáforo.
+
+Acciones
+Limpiar la pantalla (display.clear()).
+
+Encender el LED correspondiente al estado actual (display.set_pixel()).
+
+Cambiar el valor de self.state al siguiente en la secuencia.
+
+Actualizar el tiempo de referencia (self.startTime).
 
 ## **Código en MicroPython**
 
@@ -93,22 +111,4 @@ while True:
     semaforo.update()
 
 
-Estados del programa
-Rojo: LED superior encendido.
-
-Verde: LED inferior encendido.
-
-Amarillo: LED central encendido.
-
-Eventos (Inputs)
-Tiempo transcurrido mayor que el intervalo del estado actual: provoca la transición al siguiente color del semáforo.
-
-Acciones
-Limpiar la pantalla (display.clear()).
-
-Encender el LED correspondiente al estado actual (display.set_pixel()).
-
-Cambiar el valor de self.state al siguiente en la secuencia.
-
-Actualizar el tiempo de referencia (self.startTime).
 
