@@ -1,6 +1,6 @@
 # Unidad 2
 
-## Fase
+## 🔎Fase Set+Seek
 
 ### Actividad 1
 
@@ -111,6 +111,7 @@ semaforo = Semaforo()
 # Bucle principal
 while True:
     semaforo.update()
+
 
 
 
