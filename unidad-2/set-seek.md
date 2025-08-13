@@ -1,6 +1,8 @@
 # Unidad 2
 
-## Actividad 1
+## Fase
+
+### Actividad 1
 
 **Análisis de un programa con una máquina de estados simple**
 
@@ -109,6 +111,7 @@ semaforo = Semaforo()
 # Bucle principal
 while True:
     semaforo.update()
+
 
 
 
