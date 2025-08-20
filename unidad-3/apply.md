@@ -184,3 +184,27 @@ function leerSerial() {
 
 
 
+- Enlace : [Ver simulación en p5.js](https://editor.p5js.org/JuanJo003/full/akp15rA8n)
+
+
+
+- Código en Micro.Bit:
+
+```javascript
+input.onButtonPressed(Button.A, function () {
+    serial.writeLine("A")
+})
+input.onButtonPressed(Button.B, function () {
+    serial.writeLine("B")
+})
+input.onButtonPressed(Button.AB, function () {
+    serial.writeLine("S")
+})
+input.onGesture(Gesture.Shake, function () {
+    serial.writeLine("T")
+})
+```
+
+
+
+
