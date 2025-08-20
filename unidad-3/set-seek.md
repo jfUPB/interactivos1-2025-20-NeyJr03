@@ -41,4 +41,21 @@ Estados principales:
 - Acción: reinicia el contador y pasa a Configuración.
 
 
+Tabla de vectores de prueba
+
+
+| Estado inicial | Evento disparador         | Acciones realizadas                        | Estado final  |
+| -------------- | ------------------------- | ------------------------------------------ | ------------- |
+| Configuración  | `UP`                      | Incrementar el tiempo (+1 seg)             | Configuración |
+| Configuración  | `DOWN`                    | Decrementar el tiempo (–1 seg)             | Configuración |
+| Configuración  | `ARMED`                   | Iniciar cuenta regresiva en display        | Armada        |
+| Armada         | `DISARM_SEQ (A-B-A)`      | Validar secuencia y detener cuenta         | Desarmada     |
+| Armada         | `DISARM_SEQ (Incorrecta)` | Mostrar error / continuar cuenta regresiva | Armada        |
+| Armada         | `TIMEOUT`                 | Encender speaker → explosión               | Explosión     |
+| Armada         | `TOUCH`                   | Forzar reinicio y regresar a configuración | Configuración |
+| Desarmada      | —                         | Reiniciar contador a valor configurado     | Configuración |
+| Explosión      | —                         | Mantener alarma encendida                  | Explosión     |
+
+
+
 
