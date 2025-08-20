@@ -7,6 +7,9 @@
 
 
 
+## Actividad 06
+
+```javascript
 // --------------------------
 // Bomba 2.0 en p5.js
 // Máquina de estados aplicada
@@ -37,7 +40,7 @@ function draw() {
     text("Bomba Armada", width/2, 40);
     text("Tiempo: " + tiempo + "s", width/2, 100);
 
-    // Control del temporizador
+    // Control del temporizador (1 segundo)
     if (millis() - ultimoTiempo >= 1000) {
       tiempo--;
       ultimoTiempo = millis();
@@ -76,7 +79,7 @@ function keyPressed() {
     }
   }
 
-  // Secuencia para desarmar
+  // Secuencia para desarmar (A-B-A)
   if (estado === "ARMED") {
     if (key === 'A' || key === 'B') {
       secuencia.push(key);
@@ -97,6 +100,9 @@ function keyPressed() {
   }
 }
 
+```
+
+
 
 
 - Logré implementar la bomba 2.0 en p5.js respetando la técnica de máquinas de estado.
@@ -114,6 +120,7 @@ S → ARMED (shake)
 T → TOUCH (reset)
 
 - También programé la secuencia de desarme A-B-A para pasar de armado a desarmada.
+
 
 
 
