@@ -61,38 +61,13 @@ function draw() {
 // --------------------------
 function keyPressed() {
   if (estado === "CONFIG") {
-    if (key === 'A') {      // Aumenta tiempo
+    if (key === 'A') {      
       if (tiempo < 60) tiempo++;
     }
-    if (key === 'B') {      // Disminuye tiempo
+    if (key === 'B') {      
       if (tiempo > 10) tiempo--;
     }
-    if (key === 'S') {      // Shake (Armar bomba)
-      estado = "ARMED";
-      ultimoTiempo = millis();
-    }
-  }
-
-  // Secuencia para desarmar
-  if (estado === "ARMED") {
-    if (key === 'A' || key === 'B') {
-      secuencia.push(key);
-      if (secuencia.length > 3) secuencia.shift(); // mantener solo 3
-
-      if (secuencia.join('') === "ABA") {
-        estado = "DESARMADA";
-        secuencia = [];
-      }
-    }
-  }
-
-  // Reset con tecla T (Touch)
-  if (key === 'T') {
-    estado = "CONFIG";
-    tiempo = 20;
-    secuencia = [];
-  }
-}
+    if (key === 'S
 
 
 - Logré implementar la bomba 2.0 en p5.js respetando la técnica de máquinas de estado.
@@ -110,4 +85,5 @@ S → ARMED (shake)
 T → TOUCH (reset)
 
 - También programé la secuencia de desarme A-B-A para pasar de armado a desarmada.
+
 
