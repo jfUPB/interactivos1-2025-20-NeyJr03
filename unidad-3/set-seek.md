@@ -41,7 +41,12 @@ Estados principales:
 - Acción: reinicia el contador y pasa a Configuración.
 
 
+
+
+
 Tabla de vectores de prueba
+
+
 
 
 | Estado inicial | Evento disparador         | Acciones realizadas                        | Estado final  |
@@ -55,6 +60,7 @@ Tabla de vectores de prueba
 | Armada         | `TOUCH`                   | Forzar reinicio y regresar a configuración | Configuración |
 | Desarmada      | —                         | Reiniciar contador a valor configurado     | Configuración |
 | Explosión      | —                         | Mantener alarma encendida                  | Explosión     |
+
 
 
 
