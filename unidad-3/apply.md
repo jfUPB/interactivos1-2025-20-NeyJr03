@@ -6,9 +6,6 @@
 ###  Actividad 06
 
 
-
-## Actividad 06
-
 ```javascript
 // --------------------------
 // Bomba 2.0 en p5.js
@@ -120,6 +117,7 @@ S → ARMED (shake)
 T → TOUCH (reset)
 
 - También programé la secuencia de desarme A-B-A para pasar de armado a desarmada.
+
 
 
 
