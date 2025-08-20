@@ -5,6 +5,8 @@
 
 ###  Actividad 06
 
+
+
 // --------------------------
 // Bomba 2.0 en p5.js
 // Máquina de estados aplicada
@@ -112,6 +114,7 @@ S → ARMED (shake)
 T → TOUCH (reset)
 
 - También programé la secuencia de desarme A-B-A para pasar de armado a desarmada.
+
 
 
 
