@@ -10,34 +10,35 @@ La bomba 3.0 se basa en una máquina de estados que recibe eventos genéricos (p
 
 Estados principales:
 
-Configuración
+ 1. Configuración
 
-Estado inicial.
+- Estado inicial.
 
-Se puede ajustar el tiempo de la bomba (10 a 60 seg).
+- Se puede ajustar el tiempo de la bomba (10 a 60 seg).
 
-Eventos válidos: UP, DOWN, ARMED.
+- Eventos válidos: UP, DOWN, ARMED.
 
-Armada (Cuenta regresiva)
+ 2. Armada (Cuenta regresiva)
 
-Inicia la cuenta regresiva.
+- Inicia la cuenta regresiva.
 
-Se puede desactivar con la secuencia A-B-A.
+- Se puede desactivar con la secuencia A-B-A.
 
-Si la secuencia es incorrecta, continúa el conteo.
+- Si la secuencia es incorrecta, continúa el conteo.
 
-Eventos válidos: DISARM_SEQ, TIMEOUT, TOUCH.
+- Eventos válidos: DISARM_SEQ, TIMEOUT, TOUCH.
 
-Explosión
+ 3. Explosión
 
-Estado terminal cuando el contador llega a 0.
+- Estado terminal cuando el contador llega a 0.
 
-Acción: encender speaker.
+- Acción: encender speaker.
 
-Desarmada
+ 4. Desarmada
 
-Se regresa a este estado si la secuencia de desarme es correcta o si se toca el botón de touch.
+- Se regresa a este estado si la secuencia de desarme es correcta o si se toca el botón de touch.
 
-Acción: reinicia el contador y pasa a Configuración.
+- Acción: reinicia el contador y pasa a Configuración.
+
 
 
