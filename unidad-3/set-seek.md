@@ -6,7 +6,7 @@
 
 Modelo de la bomba 3.0
 
-La bomba 3.0 se basa en una máquina de estados que recibe eventos genéricos (provenientes de botones, puerto serial o p5.js). Esto permite que la lógica de la bomba sea independiente de la fuente del evento y escalable a múltiples interfaces de control.
+La bomba 3.0 es como una máquina de estados que recibe eventos genéricos (provenientes de botones, puerto serial o p5.js). Esto permite que la lógica de la bomba sea independiente de la fuente del evento y escalable a varias interfaces de control.
 
 Estados principales:
 
@@ -60,6 +60,7 @@ Tabla de vectores de prueba
 | Armada         | `TOUCH`                   | Forzar reinicio y regresar a configuración | Configuración |
 | Desarmada      | —                         | Reiniciar contador a valor configurado     | Configuración |
 | Explosión      | —                         | Mantener alarma encendida                  | Explosión     |
+
 
 
 
