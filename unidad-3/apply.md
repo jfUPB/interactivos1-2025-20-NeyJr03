@@ -123,9 +123,9 @@ T → TOUCH (reset)
 
 ### Actividad 07
 
-- Código en p5.js:
+- Código en p5.js
 
-
+```
 let estado = "CONFIG";
 let tiempo = 20;
 let ultimoSegundo = 0;
@@ -180,4 +180,5 @@ function leerSerial() {
     }
   }
 }
+
 
