@@ -125,7 +125,7 @@ T → TOUCH (reset)
 
 - Código en p5.js
 
-```
+```javascript
 let estado = "CONFIG";
 let tiempo = 20;
 let ultimoSegundo = 0;
@@ -180,6 +180,7 @@ function leerSerial() {
     }
   }
 }
-
-
 ```
+
+
+
