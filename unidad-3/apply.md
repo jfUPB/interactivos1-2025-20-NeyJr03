@@ -122,4 +122,91 @@ T → TOUCH (reset)
 
 
 
+### Actividad 07
+
+- Código en p5.js
+
+```javascript
+let estado = "CONFIG";
+let tiempo = 20;
+let ultimoSegundo = 0;
+
+// Serial
+let puerto;
+let valorSerial = "";
+
+function setup() {
+  createCanvas(400, 400);
+  textAlign(CENTER, CENTER);
+  textSize(32);
+
+  puerto = new p5.WebSerial();
+  puerto.on("data", leerSerial);
+  puerto.on("noport", () => puerto.requestPort());
+  puerto.open();
+}
+
+function draw() {
+  background(220);
+
+  if (estado === "CONFIG") {
+    text("Tiempo: " + tiempo, width / 2, height / 2);
+    text("A=+1  B=-1", width / 2, height / 2 + 40);
+    text("A+B = Start", width / 2, height / 2 + 80);
+  } else if (estado === "ARMED") {
+    text("Tiempo: " + tiempo, width / 2, height / 2);
+    if (segundo() !== ultimoSegundo) {
+      tiempo--;
+      ultimoSegundo = segundo();
+    }
+    if (tiempo <= 0) {
+      estado = "EXPLOTO";
+    }
+  } else if (estado === "EXPLOTO") {
+    text("💥 BOOM 💥", width / 2, height / 2);
+  }
+}
+
+function leerSerial() {
+  let entrada = puerto.readLine().trim();
+  if (entrada.length > 0) {
+    if (estado === "CONFIG") {
+      if (entrada === "A") tiempo++;
+      if (entrada === "B") tiempo--;
+      if (entrada === "S") estado = "ARMED";
+    }
+    if (entrada === "T") {
+      estado = "CONFIG";
+      tiempo = 20;
+    }
+  }
+}
+```
+
+
+
+- Enlace : [Ver simulación en p5.js](https://editor.p5js.org/JuanJo003/full/akp15rA8n)
+
+
+
+- Código en Micro.Bit:
+
+```javascript
+input.onButtonPressed(Button.A, function () {
+    serial.writeLine("A")
+})
+input.onButtonPressed(Button.B, function () {
+    serial.writeLine("B")
+})
+input.onButtonPressed(Button.AB, function () {
+    serial.writeLine("S")
+})
+input.onGesture(Gesture.Shake, function () {
+    serial.writeLine("T")
+})
+```
+
+
+
+
 
