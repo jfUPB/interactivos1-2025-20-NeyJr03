@@ -121,6 +121,7 @@ T → TOUCH (reset)
 
 
 
+
 ### Actividad 07
 
 - Código en p5.js
@@ -204,6 +205,7 @@ input.onGesture(Gesture.Shake, function () {
     serial.writeLine("T")
 })
 ```
+
 
 
 
