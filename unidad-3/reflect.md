@@ -11,15 +11,15 @@
 Una máquina de estados es como una forma de organizar un programa por pasos o “estados” que cambian dependiendo de lo que pase. En lugar de que todo sea un montón de instrucciones seguidas, se va moviendo de un estado a otro según las condiciones.
 Los cuatro componentes que usamos en esta unidad son:
 
-Los estados en los que puede estar el sistema (ejemplo: CONFIG, ARMED, EXPLOTO).
+- Los estados en los que puede estar el sistema (ejemplo: CONFIG, ARMED, EXPLOTO).
 
-Los eventos o entradas que hacen que algo cambie (ejemplo: presionar A o B en el micro:bit).
+- Los eventos o entradas que hacen que algo cambie (ejemplo: presionar A o B en el micro:bit).
 
-Las acciones que se ejecutan al recibir esos eventos (ejemplo: aumentar el tiempo, iniciar la bomba, mostrar el BOOM).
+- Las acciones que se ejecutan al recibir esos eventos (ejemplo: aumentar el tiempo, iniciar la bomba, mostrar el BOOM).
 
-Y las transiciones, que son los pasos que conectan un estado con otro cuando ocurre un evento.
+- Y las transiciones, que son los pasos que conectan un estado con otro cuando ocurre un evento.
 
-(Al comienzo pensé que también se contaba el “tiempo” como un componente, pero en realidad eso es más una variable de apoyo).
+- (Al comienzo pensé que también se contaba el “tiempo” como un componente, pero en realidad eso es más una variable de apoyo).
 
 2. ¿Por qué son útiles para manejar concurrencia en un solo hilo como micro:bit o p5.js?
 La máquina de estados es muy útil porque permite que un programa atienda varias cosas “a la vez”, aunque en realidad el micro:bit o p5.js solo hace una cosa por turno. Lo que pasa es que, al tener cada estado bien definido, el programa revisa rápidamente qué debe hacer en cada momento sin quedarse “pegado” en una tarea.
@@ -68,6 +68,7 @@ Yo al principio pensé que era solo como una simulación gráfica, pero en reali
 
 
 5. Nada en específico, solo decir que en varios momentos me sentí algo frustrado, pero logré resolverlo
+
 
 
 
