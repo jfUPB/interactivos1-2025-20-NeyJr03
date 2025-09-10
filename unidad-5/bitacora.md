@@ -320,7 +320,7 @@ Moví el micro:bit y presioné botones mientras revisaba los valores.
 Vi cómo los bytes del paquete cambiaban según xValue, yValue y el estado de los botones.
 
 
-- Conclusiones
+- Conclusiones:
 
 Entendí que un paquete estructurado (byte de inicio + datos + checksum) es mucho más confiable que enviar solo datos en bruto.
 
@@ -331,4 +331,117 @@ Aprendí a usar checksum como una forma sencilla de verificar errores en la comu
 ASCII → legible, fácil de depurar, pero ocupa más espacio y es más lento.
 
 
+### Actividad 05 – Reflect: Consolidación y Metacognición
+
+| Aspecto        | Protocolo ASCII | Protocolo Binario |
+|----------------|-----------------|-------------------|
+| **Eficiencia** | Menos eficiente, porque cada número se convierte en caracteres de texto. Ej: `-123,456,1,0` ocupa muchos bytes. | Más eficiente: los valores se envían directamente en binario. Ej: el mismo paquete ocupa 8 bytes exactos. |
+| **Velocidad**  | Más lento, porque hay que convertir texto a números. | Más rápido: se interpreta directo en números binarios. |
+| **Facilidad**  | Fácil de leer por humanos en SerialTerminal. | Difícil de leer directamente, se necesita interpretar en hex. |
+| **Uso de recursos** | Usa más memoria y más tiempo de procesamiento. | Consume menos recursos y es más compacto. |
+
+
+
+En mi aplicación, cuando usé ASCII, podía leer fácilmente los valores en el terminal, pero se veía desordenado y ocupaba mucho. En binario, aunque más difícil de leer, el programa corrió más fluido y confiable.
+
+
+Preguntas de reflexión:
+
+- ¿Por qué fue necesario introducir framing en el protocolo binario?
+ Porque en binario los datos no tienen separadores visibles como las comas o el salto de línea en ASCII. El framing permite al receptor saber dónde empieza y termina cada paquete.
+
+- ¿Cómo funciona el framing?
+Se añade un byte especial de inicio (0xAA) y un checksum al final. El receptor busca ese byte para sincronizar y luego valida el paquete completo.
+
+- ¿Qué es un carácter de sincronización?
+Es un valor único que marca el inicio de cada paquete. En mi caso fue 0xAA, que no se confunde con los datos normales.
+
+- ¿Qué es el checksum y para qué sirve?
+Es un número calculado a partir de los datos. Sirve para comprobar si un paquete llegó completo o si se corrompió en la transmisión.
+
+
+
+Análisis del código en p5.js:
+
+- ¿Qué hace la función concat? ¿Por qué?
+Agrega los nuevos bytes recibidos (newData) al buffer (serialBuffer). Así no se pierde información si los paquetes llegan incompletos en una sola lectura.
+
+```javascript
+serialBuffer = serialBuffer.concat(newData);
+
+```
+
+- ¿Por qué el bucle se ejecuta solo si el buffer tiene 8 o más bytes?
+Porque cada paquete tiene 8 bytes exactos: 1 de inicio, 6 de datos y 1 de checksum. Si hay menos, el paquete está incompleto.
+
+- ¿Qué significa 0xAA?
+Es el byte de inicio (framing), equivalente al carácter de sincronización.
+
+- ¿Qué hacen shift y continue?
+shift() elimina el primer byte del buffer.
+continue hace que el bucle pase a la siguiente iteración.
+Se usan cuando el primer byte no es 0xAA, para seguir buscando el inicio de un paquete válido.
+
+- ¿Qué hace break si hay menos de 8 bytes?
+Rompe el bucle y espera más datos. Esto evita procesar paquetes incompletos.
+
+
+```javascript
+if (serialBuffer.length < 8) break;
+
+```
+
+Diferencia entre slice y splice:
+
+slice(0, 8) → copia los primeros 8 bytes sin quitarlos del buffer.
+
+splice(0, 8) → elimina esos 8 bytes ya procesados.
+Se usan juntos porque primero necesitamos copiar el paquete y luego borrarlo del buffer.
+
+- ¿Cómo opera reduce en el checksum?
+Va sumando todos los valores del arreglo dataBytes.
+
+
+```javascript
+let computedChecksum = dataBytes.reduce((acc, val) => acc + val, 0) % 256;
+
+```
+- ¿Por qué se compara el checksum enviado con el calculado?
+Para verificar que el paquete no tenga errores. Si no coinciden, el paquete se descarta.
+
+
+- ¿Qué hace la instrucción continue en ese caso?
+Salta a la siguiente iteración y ignora el paquete dañado.
+
+
+
+DataView y conversiones:
+- ¿Qué es un DataView?
+Es una forma de leer datos binarios directamente desde un buffer, conociendo el tipo de dato (int16, uint8, etc.).
+
+
+```javascript
+let buffer = new Uint8Array(dataBytes).buffer;
+let view = new DataView(buffer);
+
+```
+
+- ¿Por qué son necesarias estas conversiones?
+Porque el buffer es solo una lista de bytes crudos. Para interpretarlos como enteros con signo (getInt16) o sin signo (getUint8) necesitamos DataView.
+
+
+Ejemplo del código:
+
+
+```javascript
+microBitX = view.getInt16(0) + windowWidth / 2;
+microBitY = view.getInt16(2) + windowHeight / 2;
+microBitAState = view.getUint8(4) === 1;
+microBitBState = view.getUint8(5) === 1;
+
+```
+
+Así los valores del micro:bit se convierten en números reales que puedo usar en p5.js.
+
+Con esta reflexión cierro la unidad 5, mostrando que entendí la diferencia entre protocolos ASCII y binarios, el concepto de framing, y cómo p5.js interpreta datos seriales.
 
