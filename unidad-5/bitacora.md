@@ -2,7 +2,6 @@
 # Evidencias de la unidad 5
 
 ## Actividad 01 – Caso de estudio
-
 Comunicación entre micro:bit y p5.js
 
 El micro:bit y el sketch de p5.js se comunican mediante el puerto serial (UART).
@@ -30,9 +29,9 @@ Al final se añade un salto de línea \n que marca el fin del mensaje.
 
 Ejemplo de un mensaje real:
 
+```javascript
 -23,1045,True,False
-
-
+```
 
 Esto facilita que en p5.js se pueda separar la cadena en sus cuatro partes usando .split(",").
 
@@ -40,6 +39,7 @@ Lectura de datos en p5.js
 
 En el sketch.js, los datos se leen en la sección:
 
+```javascript
 if (port.availableBytes() > 0) {
   let data = port.readUntil("\n");
   if (data) {
@@ -54,7 +54,7 @@ if (port.availableBytes() > 0) {
     }
   }
 }
-
+```
 
 Aquí ocurre lo más importante:
 
@@ -71,6 +71,8 @@ Eventos A pressed y B released
 Los eventos no vienen directamente del micro:bit.
 El micro:bit solo envía si los botones están en True o False.
 En p5.js, la función updateButtonStates() detecta el cambio de estado comparando el valor actual con el anterior:
+
+```javascript
 
 function updateButtonStates(newAState, newBState) {
   if (newAState === true && prevmicroBitAState === false) {
@@ -90,7 +92,7 @@ function updateButtonStates(newAState, newBState) {
   prevmicroBitAState = newAState;
   prevmicroBitBState = newBState;
 }
-
+```
 
 Así es como el código genera eventos a partir de los datos seriales, lo que da la ilusión de que p5.js “sabe” cuándo se presionó o soltó un botón.
 
@@ -100,4 +102,3 @@ Este caso de estudio me ayudó a ver cómo una máquina de estados y un protocol
 Al principio pensaba que el micro:bit mandaba directamente “eventos de teclado”, pero en realidad lo que hace es enviar solo números y booleanos. Es p5.js el que interpreta esos cambios y los convierte en eventos útiles para el dibujo.
 
 Me pareció muy interesante que un protocolo tan simple como “valores separados por comas” sea suficiente para sincronizar hardware y software de forma confiable. También entendí mejor por qué es importante el carácter de fin de línea: sin él, los mensajes se mezclarían y sería imposible separar bien cada dato.
-
