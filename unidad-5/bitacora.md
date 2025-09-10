@@ -148,7 +148,7 @@ while True:
 
 ```
 
-🔎 Explicación corta:
+Explicación corta:
 El formato >2h2B significa:
 
 >: big-endian (byte más significativo primero).
@@ -156,15 +156,15 @@ El formato >2h2B significa:
 2h: dos enteros cortos (2 bytes cada uno → 4 bytes en total).
 
 2B: dos enteros sin signo (1 byte cada uno → 2 bytes en total).
-➡️ Cada mensaje ocupa 6 bytes.
+Cada mensaje ocupa 6 bytes.
 
 Experimento 1: Datos en modo Texto (SerialTerminal)
 
-✍️ Cuando visualicé los datos en modo texto se veía una serie de símbolos extraños. Esto ocurre porque los datos están en formato binario y no corresponden a caracteres ASCII legibles.
+Cuando visualicé los datos en modo texto se veía una serie de símbolos extraños. Esto ocurre porque los datos están en formato binario y no corresponden a caracteres ASCII legibles.
 
 Experimento 2: Datos en modo Hexadecimal
 
-✍️ En modo Hex pude ver los bytes representados en valores hexadecimales. Esto se relaciona con la línea:
+En modo Hex pude ver los bytes representados en valores hexadecimales. Esto se relaciona con la línea:
 
 data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
 
@@ -173,13 +173,13 @@ Cada bloque de 6 bytes representa un mensaje con los valores de aceleración y b
 
 Ventajas y desventajas del formato binario
 
-✍️ Ventajas:
+Ventajas:
 
 Ocupa menos espacio (6 bytes en lugar de varias decenas en ASCII).
 
 Se transmite y procesa más rápido.
 
-✍️ Desventajas:
+Desventajas:
 
 No es legible directamente por humanos.
 
@@ -209,11 +209,11 @@ while True:
 
 ```
 
-✍️ Cada mensaje enviado tiene 6 bytes (2+2+1+1). Los primeros 4 corresponden a xValue y yValue (pueden ser positivos o negativos), y los últimos 2 a los botones A y B.
+ Cada mensaje enviado tiene 6 bytes (2+2+1+1). Los primeros 4 corresponden a xValue y yValue (pueden ser positivos o negativos), y los últimos 2 a los botones A y B.
 
 Números negativos en >2h2B
 
-✍️ Los números negativos se representan en complemento a dos dentro de los 2 bytes asignados a cada entero corto. Por eso en Hex aparecen como valores grandes (ej. -1 se ve como FF FF).
+ Los números negativos se representan en complemento a dos dentro de los 2 bytes asignados a cada entero corto. Por eso en Hex aparecen como valores grandes (ej. -1 se ve como FF FF).
 
 Comparación ASCII vs Binario
 
@@ -246,10 +246,89 @@ while True:
 
 ```
 
-✍️ Diferencias observadas:
+Diferencias observadas:
 
 Binario → compacto, rápido, eficiente.
 
+
+### Actividad 04 – Aplicación
+
+Código en Micro:bit
+
+
+```javascript
+from microbit import *
+import struct
+
+uart.init(115200)
+display.set_pixel(0, 0, 9)
+
+while True:
+    xValue = accelerometer.get_x()
+    yValue = accelerometer.get_y()
+    aState = button_a.is_pressed()
+    bState = button_b.is_pressed()
+    data = struct.pack('>2h2B', xValue, yValue, int(aState), int(bState))
+    checksum = sum(data) % 256
+    packet = b'\xAA' + data + bytes([checksum])
+    uart.write(packet)
+    sleep(100)
+
+```
+
+- Evidencias:
+- Proceso de construcción: 
+
+Empecé con el código de la actividad anterior que enviaba datos binarios.
+
+Agregué un byte de inicio (0xAA) para que el receptor identifique fácilmente cada paquete.
+
+Implementé un checksum con sum(data) % 256 para validar que los datos lleguen completos y sin errores.
+
+Finalmente armé el paquete con b'\xAA' + data + bytes([checksum]) y lo envié por el puerto serial.
+
+- Pruebas intermedias:
+
+Al inicio olvidé importar struct y el código no funcionaba → lo solucioné agregando import struct.
+
+En otra prueba, la aplicación no mostraba nada porque había olvidado sumar el byte de inicio antes del paquete.
+
+Después de corregir esto, pude ver que el receptor recibía los datos de forma clara y con menos errores que antes.
+
+- Errores encontrados y solución:
+
+Bug común: al calcular el checksum usé directamente sum(packet) en lugar de sum(data), lo que daba resultados incorrectos.
+
+Solución: corregí la fórmula para aplicar el checksum solo a los datos (sum(data) % 256).
+
+- Experimentos realizados:
+
+Probé el código en la aplicación SerialTerminal para ver los bytes en hexadecimal.
+
+Se notaba claramente el byte de inicio 0xAA.
+
+El último byte cambiaba de acuerdo al checksum.
+
+Comparé el envío con y sin checksum:
+
+Con checksum → pude detectar si había errores en la transmisión.
+
+Sin checksum → a veces llegaban datos cortados y no era fácil identificarlos.
+
+Moví el micro:bit y presioné botones mientras revisaba los valores.
+
+Vi cómo los bytes del paquete cambiaban según xValue, yValue y el estado de los botones.
+
+
+- Conclusiones
+
+Entendí que un paquete estructurado (byte de inicio + datos + checksum) es mucho más confiable que enviar solo datos en bruto.
+
+El formato binario es más compacto, aunque menos legible que ASCII, pero es mejor para sistemas donde se necesita velocidad y seguridad.
+
+Aprendí a usar checksum como una forma sencilla de verificar errores en la comunicación serial.
+
 ASCII → legible, fácil de depurar, pero ocupa más espacio y es más lento.
+
 
 
